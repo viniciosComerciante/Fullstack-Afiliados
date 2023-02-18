@@ -6,8 +6,8 @@ import {
     Param,
     Patch,
     Post,
-    Res,
 } from '@nestjs/common';
+
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
@@ -17,12 +17,14 @@ export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
     @Get()
-    async findAll(@Res() response) {
-        return response.status(200).send(this.usersService.findAll());
+    async findAll() {
+        const users = await this.usersService.findAll();
+        return users;
     }
     @Get(':id')
     async findOne(@Param('id') id: string) {
-        return this.usersService.findOne(id);
+        const user = await this.usersService.findOne(id);
+        return user;
     }
 
     @Post()
@@ -36,11 +38,13 @@ export class UsersController {
         @Param('id') id: string,
         @Body() updateUserDto: UpdateUserDto,
     ) {
-        return this.usersService.update(id, updateUserDto);
+        const updatedUser = await this.usersService.update(id, updateUserDto);
+        return updatedUser;
     }
 
     @Delete(':id')
     async delete(@Param('id') id: string) {
-        return this.usersService.remove(id);
+        const userRemoved = await this.usersService.remove(id);
+        return userRemoved;
     }
 }

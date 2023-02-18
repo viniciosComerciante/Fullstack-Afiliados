@@ -1,24 +1,29 @@
 import { Injectable } from '@nestjs/common';
-import { UserEntity } from './entities/user.entity';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { UsersRepository } from './repositories/users.repository';
 
 @Injectable()
 export class UsersService {
-    private users: UserEntity[] = [
-        {
-            id: 'da5sda4sd5',
-            email: 'vinicompif@gmail.com',
-            name: 'vinicios da costa oliveira',
-            password: '545422sds6ad',
-            created_at: new Date(),
-            updated_at: new Date(),
-        },
-        {
-            id: 'dsa54d4545dsdsd',
-            email: 'robertabarros14@gmail.com',
-            name: 'Roberta marcial barros',
-            password: '65d5sadsds',
-            created_at: new Date(),
-            updated_at: new Date(),
-        },
-    ];
+    constructor(private readonly repository: UsersRepository) {}
+
+    create(createUserDto: CreateUserDto) {
+        return this.repository.create(createUserDto);
+    }
+
+    async findAll() {
+        return this.repository.findAll();
+    }
+
+    findOne(id: string) {
+        return this.repository.findOne(id);
+    }
+
+    update(id: string, updateUserDto: UpdateUserDto) {
+        return this.repository.update(id, updateUserDto);
+    }
+
+    remove(id: string) {
+        return this.repository.remove(id);
+    }
 }
