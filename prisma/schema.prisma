@@ -22,13 +22,20 @@ model User {
 }
 
 model Sales {
-    id String @id @default(uuid())
+    id               String           @id @default(uuid())
+    transactionType  TransactionsType @relation(fields: [transaction_type], references: [type])
+    transaction_type Int
+    date             DateTime
+    product          String           @db.VarChar(50)
+    value            BigInt
+    salesman         String           @db.VarChar(50)
 }
 
 model TransactionsType {
-    type        Int    @id @default(autoincrement())
-    description String @db.VarChar(60)
+    type        Int     @id @default(autoincrement())
+    description String  @db.VarChar(60)
     nature      Nature
+    Sales       Sales[]
 }
 
 enum Nature {
