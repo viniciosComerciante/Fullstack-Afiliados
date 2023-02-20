@@ -19,7 +19,7 @@ export class CreateSaleDto {
     product: string;
     @IsInt()
     @IsNotEmpty()
-    value: bigint;
+    value: number;
     @IsString()
     @IsNotEmpty()
     salesman: string;

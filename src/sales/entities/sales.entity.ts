@@ -1,6 +1,6 @@
 import { Sales } from '@prisma/client';
 
-export class Sale implements Sales {
+export class SalesEntity implements Sales {
     transaction_type: number;
     date: Date;
     product: string;
