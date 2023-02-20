@@ -29,8 +29,7 @@ export class UsersController {
 
     @Post()
     async create(@Body() createUserDto: CreateUserDto) {
-        this.usersService.create(createUserDto);
-        return createUserDto;
+        return this.usersService.create(createUserDto);
     }
 
     @Patch(':id')
