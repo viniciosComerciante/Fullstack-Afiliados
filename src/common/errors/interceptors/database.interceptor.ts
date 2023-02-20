@@ -16,6 +16,7 @@ export class DatabaseInterceptor implements NestInterceptor {
         return next.handle().pipe(
             catchError(error => {
                 if (isPrismaError(error)) {
+                    console.log('siasdiasndjasdjkdldkadkals');
                     error = handleDatabaseErrors(error);
                 }
                 if (error instanceof DatabaseError) {
